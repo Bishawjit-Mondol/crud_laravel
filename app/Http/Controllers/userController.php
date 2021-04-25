@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\user_model;
+use App\Models\UserModel;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -10,8 +11,8 @@ class userController extends Controller
 {
     public function index()
     {
-        $users = user_model::latest()->get();
-        //$users = DB::table('user_models')->get();
+        $users = UserModel::latest()->get();
+        //$users = DB::table('UserModels')->get();
         return view('user', compact('users'));
     }
 
@@ -31,8 +32,8 @@ class userController extends Controller
             'remarks.required' => 'Please enter your comment',
         ]);
 
-
-        user_model::insert([
+try{
+        UserModel::create([
             'name' =>  $request->name,
             'email' =>  $request->email,
             'phone' => $request->phone,
@@ -41,18 +42,21 @@ class userController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Successfully Inserted');
+}catch(\Exception $e) {
+    throw new Exception($e->getMessage());
+}
     }
 
     public function edit($id)
     {
-        $users_data = user_model::findorFail($id);
+        $users_data = UserModel::findorFail($id);
         return view('edit', compact('users_data'));
     }
 
 
     public function update(Request $request, $id)
     {
-        user_model::findorFail($id)->update([
+        UserModel::findorFail($id)->update([
             'name' =>  $request->name,
             'email' =>  $request->email,
             'phone' => $request->phone,
@@ -65,7 +69,7 @@ class userController extends Controller
 
     public function delete($id)
     {
-        user_model::findorFail($id)->delete();
+        UserModel::findorFail($id)->delete();
         return redirect()->back()->with('delete', 'Successfully Deleted');
     }
 }
