@@ -113,23 +113,37 @@
         $loop = 1;
         @endphp
 
-        <?php
-        foreach ($users as $user) :
-        ?>
+        @php
+        foreach ($us as $user) :
+        @endphp
           <tr>
-            <th scope="row"><?= $loop++ ?></th>
-            <td><?= $user->name ?></td>
-            <td><?= $user->email ?></td>
-            <td><?= $user->phone ?></td>
-            <td><?= $user->occupation ?></td>
+            <th scope="row">{{ $loop+11 }}</th>
+            <td>{{ $user->name }}</td>
+            <td>{{ $user->email }}</td>
+            <td>{{ $user->phone }}</td>
+            <td>{{ $user->occupation }}</td>
             <td>
               <a href="{{ url('user/edit/' .$user->id ) }}" class="btn btn-primary">Edit</a>
               <a href="{{ url('user/delete/' .$user->id ) }}" class="btn btn-danger" onclick="return confirm('Do you want to delete this?')">Delete</a>
             </td>
           </tr>
-        <?php
+        @php
         endforeach;
-        ?>
+        @endphp
+
+        {{-- @foreach ($users as $i => $user)
+          <tr>
+            <th scope="col">{{ $i+11 }}</th>
+            <td>{{ $user->name }}</td>
+            <td>{{ $user->email }}</td>
+            <td>{{ $user->phone }}</td>
+            <td>{{ $user->occupation }}</td>
+            <td>
+              <a href="{{ url('user/edit/' .$user->id ) }}" class="btn btn-primary">Edit</a>
+              <a href="{{ url('user/delete/' .$user->id ) }}" class="btn btn-danger" onclick="return confirm('Do you want to delete this?')">Delete</a>
+            </td>
+          </tr>
+        @endforeach --}}
       </tbody>
     </table>
   </div>
