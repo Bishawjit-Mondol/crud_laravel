@@ -114,10 +114,10 @@
         @endphp
 
         @php
-        foreach ($us as $user) :
+        foreach ($users as $user) :
         @endphp
           <tr>
-            <th scope="row">{{ $loop+11 }}</th>
+            <th scope="row">{{ $loop++ }}</th>
             <td>{{ $user->name }}</td>
             <td>{{ $user->email }}</td>
             <td>{{ $user->phone }}</td>

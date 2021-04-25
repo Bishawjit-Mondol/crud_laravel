@@ -10,7 +10,7 @@ class userController extends Controller
 {
     public function index()
     {
-        $users = user_model::OrderBy('id', 'DESC')->get();
+        $users = user_model::latest()->get();
         //$users = DB::table('user_models')->get();
         return view('user', compact('users'));
     }
